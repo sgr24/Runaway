@@ -26,33 +26,42 @@ public class WallRunning : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     private PlayerMovement pm;
-    private Rigidbody rb;
+    private CharacterController controller;
 
     [Header("Wall Run Detection")]
     public KeyCode upwardsRunKey = KeyCode.LeftShift;
     public KeyCode downwardsRunKey = KeyCode.LeftControl;
 
-    // the variables to track the upward and downwards running
+    // Variables to track upward and downward running
     private bool upwardsRunning = false;
     private bool downwardsRunning = false;
-    // can be adjusted in code and in inspect element
+    // Adjustable in code and inspector
     public float wallClimbSpeed = 3f;
 
     [Header("Respawn Settings")]
     public Transform respawnPoint;
-    public float fallLimit = -10f; 
+    public float fallLimit = -10f;
+
+    private Vector3 moveDirection;
+    private Vector3 velocity;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         pm = GetComponent<PlayerMovement>();
     }
-
     private void Update()
     {
         CheckForWall();
         StateMachine();
         CheckFallOffMap();
+
+        // Apply gravity
+        if (pm.wallrunning)
+        {
+            velocity.y += Physics.gravity.y * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
@@ -78,13 +87,12 @@ public class WallRunning : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // stage 1 - Wallrunning
-        if((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
+        // Stage 1 - Wallrunning
+        if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
         {
             if (!pm.wallrunning)
                 StartWallRun();
         }
-
         // Stage 2 - None
         else
         {
@@ -92,7 +100,7 @@ public class WallRunning : MonoBehaviour
                 StopWallRun();
         }
 
-        // update running states
+        // Update running states
         upwardsRunning = Input.GetKey(upwardsRunKey);
         downwardsRunning = Input.GetKey(downwardsRunKey);
     }
@@ -100,49 +108,38 @@ public class WallRunning : MonoBehaviour
     private void StartWallRun()
     {
         pm.wallrunning = true;
+        velocity = Vector3.zero; // Reset velocity when starting wall run
     }
 
     private void WallRunningMovement()
     {
-        rb.useGravity = false;
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
+        Vector3 wallForward = Vector3.Cross(wallNormal, Vector3.up);
 
-        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
-
-        // finding which way youre wall running
-        if((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             wallForward = -wallForward;
 
-        // running forward
-        rb.AddForce(wallForward * wallRunForce, ForceMode.Force);
+        // Running forward
+        moveDirection = wallForward * wallRunForce;
 
-        // upwards/downwards force
+        // Upwards/downwards movement
         if (upwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, wallClimbSpeed, rb.velocity.z);
+            moveDirection += Vector3.up * wallClimbSpeed;
         if (downwardsRunning)
-            rb.velocity = new Vector3(rb.velocity.x, -wallClimbSpeed, rb.velocity.z);
+            moveDirection += Vector3.down * wallClimbSpeed;
 
-        // push to the wall force
+        // Push to the wall force
         if (!(wallLeft && horizontalInput > 0) && !(wallRight && horizontalInput < 0))
-            rb.AddForce(-wallNormal * 100, ForceMode.Force);
+            moveDirection += -wallNormal * 100;
 
-        // Upwards and downwards movement
-        if (Input.GetKey(upwardsRunKey))
-        {
-            rb.AddForce(transform.up * wallRunForce / 2f, ForceMode.Force);
-        }
-        if (Input.GetKey(downwardsRunKey))
-        {
-            rb.AddForce(-transform.up * wallRunForce / 2f, ForceMode.Force);
-        }
+        // Move the character
+        controller.Move(moveDirection * Time.deltaTime);
     }
 
     private void StopWallRun()
     {
         pm.wallrunning = false;
-        rb.useGravity = true;
+        velocity = Vector3.zero; // Reset velocity when stopping wall run
     }
 
     private void CheckFallOffMap()
@@ -155,7 +152,7 @@ public class WallRunning : MonoBehaviour
 
     private void Respawn()
     {
-        rb.velocity = Vector3.zero;
+        velocity = Vector3.zero;
         transform.position = respawnPoint.position;
     }
 }
