@@ -26,8 +26,8 @@ public class AnimationAndMovementControllers : MonoBehaviour
         CharacterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
-        isWalkingHash = animator.StringToHash("isWalking");
-        isRunningHash = animator.StringToHash("isRunning");
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isRunningHash = Animator.StringToHash("isRunning");
 
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.canceled += onMovementInput;
@@ -104,7 +104,7 @@ public class AnimationAndMovementControllers : MonoBehaviour
         {
             float gravity = -9.8f;
             currentMovement.y += gravity;
-            currentRunMovement += gravity;
+            currentRunMovement.y += gravity;
         }
     }
 
