@@ -98,7 +98,7 @@ public class AnimationAndMovementControllers : MonoBehaviour
         {
             float groundedGravity = -.05f;
             currentMovement.y = groundedGravity;
-            currentRunMovement.y = groundedGravity
+            currentRunMovement.y = groundedGravity;
         }
         else
         {
