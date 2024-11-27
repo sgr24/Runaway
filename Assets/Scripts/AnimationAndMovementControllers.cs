@@ -9,6 +9,9 @@ public class AnimationAndMovementControllers : MonoBehaviour
     CharacterController CharacterController;
     Animator animator;
 
+    int isWalkingHash;
+    int isRunningHash;
+
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     Vector3 currentRunMovement;
@@ -22,6 +25,9 @@ public class AnimationAndMovementControllers : MonoBehaviour
         playerInput= new PlayerInput();
         CharacterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        isWalkingHash = animator.StringToHash("isWalking");
+        isRunningHash = animator.StringToHash("isRunning");
 
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.canceled += onMovementInput;
@@ -64,8 +70,8 @@ public class AnimationAndMovementControllers : MonoBehaviour
 
     void handleAnimation()
     {
-        bool isWalking = animator.GetBool("isWalking");
-        bool isRunning = animator.GetBool("isRunning");
+        bool isWalking = animator.GetBool("isWalkingHash");
+        bool isRunning = animator.GetBool("isRunningHash");
 
         if (isMovementPressed && !isWalking)
         {
@@ -74,6 +80,31 @@ public class AnimationAndMovementControllers : MonoBehaviour
         else if (!isMovementPressed && isWalking)
         {
             animator.SetBool("isWalking", false);
+        }
+
+        if ((isMovementPressed && isRunPressed) && !isRunning)
+        {
+            animator.SetBool(isRunningHash, true);
+        }
+        else if ((!isMovementPressed || !isRunPressed) && isRunning)
+        {
+            animator.SetBool(isRunningHash, false);
+        }
+    }
+
+    void handleGravity()
+    {
+        if (CharacterController.isGrounded) 
+        {
+            float groundedGravity = -.05f;
+            currentMovement.y = groundedGravity;
+            currentRunMovement.y = groundedGravity
+        }
+        else
+        {
+            float gravity = -9.8f;
+            currentMovement.y += gravity;
+            currentRunMovement += gravity;
         }
     }
 
