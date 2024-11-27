@@ -12,6 +12,7 @@ public class AnimationAndMovementControllers : MonoBehaviour
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     bool isMovementPressed;
+    float rotationFactorPerFrame = 1.0f;
 
     void Awake()
     {
@@ -22,6 +23,23 @@ public class AnimationAndMovementControllers : MonoBehaviour
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.canceled += onMovementInput;
         playerInput.CharacterControls.Move.performed += onMovementInput;
+    }
+
+    void handleRotation()
+    {
+        Vector3 positionToLookAt;
+
+        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.y = 0.0f;
+        positionToLookAt.z = currentMovement.z;
+
+        Quaternion currentRotation = transform.rotation;
+
+        if (isMovementPressed)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame);
+        }
     }
 
     void onMovementInput (InputAction.CallbackContext context)
@@ -50,6 +68,7 @@ public class AnimationAndMovementControllers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        handleRotation();
         handleAnimation();
         CharacterController.Move(currentMovement * Time.deltaTime);
     }
