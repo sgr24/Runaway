@@ -22,8 +22,8 @@ public class AnimationAndMovementController : MonoBehaviour
     bool isRunPressed;
 
     // constants
-    float rotationFactorPerFrame = 15.0f;
-    float runMultiplier = 3.0f;
+    float rotationFactorPerFrame = 30.0f;
+    float runMultiplier = 15.0f;
     int zero = 0;
     float gravity = -9.8f;
     float groundedGravity = -.05f;
