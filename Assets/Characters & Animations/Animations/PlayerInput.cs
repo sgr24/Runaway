@@ -127,8 +127,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d88f4b8b-0b20-4537-9346-0b2952dc1ff3"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
