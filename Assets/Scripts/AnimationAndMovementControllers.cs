@@ -102,7 +102,9 @@ public class AnimationAndMovementController : MonoBehaviour
             _animator.SetInteger(_jumpCountHash, _jumpCount);
             _currentMovement.y = _initialJumpVelocities[_jumpCount];
             _appliedMovement.y = _initialJumpVelocities[_jumpCount];
-        } else if (!_isJumpPressed && _isJumping && _characterController.isGrounded) {
+        } 
+        else if (!_isJumpPressed && _isJumping && _characterController.isGrounded) 
+        {
             _isJumping = false;
         }
     }
