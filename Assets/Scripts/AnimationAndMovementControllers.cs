@@ -5,16 +5,15 @@ using UnityEngine.InputSystem;
 
 public class AnimationAndMovementController : MonoBehaviour
 {
-    // declare reference variables
     CharacterController characterController;
     Animator animator;
-    PlayerInput playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector -- see 10:30 in this video
+    PlayerInput playerInput;
 
-    // variables to store optimized setter/getter parameter IDs
+    
     int isWalkingHash;
     int isRunningHash;
 
-    // variables to store player input values
+    
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     Vector3 currentRunMovement;
@@ -28,10 +27,10 @@ public class AnimationAndMovementController : MonoBehaviour
     float gravity = -9.8f;
     float groundedGravity = -.05f;
 
-    // Awake is called earlier than Start in Unity's event life cycle
+    
     void Awake()
     {
-        // initially set reference variables
+        
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -40,7 +39,7 @@ public class AnimationAndMovementController : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
 
-        // set the player input callbacks
+        // setting the player input callbacks
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.canceled += onMovementInput;
         playerInput.CharacterControls.Move.performed += onMovementInput;
@@ -72,7 +71,6 @@ public class AnimationAndMovementController : MonoBehaviour
         }
     }
 
-    // handler function to set the player input values
     void onMovementInput(InputAction.CallbackContext context)
     {
         currentMovementInput = context.ReadValue<Vector2>();
@@ -126,7 +124,6 @@ public class AnimationAndMovementController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         handleGravity();
