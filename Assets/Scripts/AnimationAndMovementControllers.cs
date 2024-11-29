@@ -5,12 +5,10 @@ using UnityEngine.InputSystem;
 
 public class AnimationAndMovementController : MonoBehaviour
 {
-    // declare reference variables
     CharacterController characterController;
     Animator animator;
-    PlayerInput playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector
+    PlayerInput playerInput;
 
-    // variables to store optimized setter/getter parameter IDs
     int isWalkingHash;
     int isRunningHash;
 
@@ -22,7 +20,6 @@ public class AnimationAndMovementController : MonoBehaviour
     bool isMovementPressed;
     bool isRunPressed;
 
-    // constants
     float rotationFactorPerFrame = 20.0f;
     float runMultiplier = 10.0f;
     int zero = 0;
@@ -45,7 +42,7 @@ public class AnimationAndMovementController : MonoBehaviour
     Dictionary<int, float> jumpGravities = new Dictionary<int, float>();
     Coroutine currentJumpResetRoutine = null;
 
-    // Awake is called earlier than Start in Unity's event life cycle
+    
     void Awake() 
     {
         // initially set reference variables
@@ -53,13 +50,13 @@ public class AnimationAndMovementController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
-        // set the parameter hash references
+        // setting the parameter hash references
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
         jumpCountHash = Animator.StringToHash("jumpCount");
 
-        // set the player input callbacks
+        // setting the player input callbacks
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.canceled += onMovementInput;
         playerInput.CharacterControls.Move.performed += onMovementInput;
@@ -135,7 +132,6 @@ public class AnimationAndMovementController : MonoBehaviour
         Quaternion currentRotation = transform.rotation;
 
         if (isMovementPressed) {
-            // creates a new rotation based on where the player is currently pressing
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
             // rotate the character to face the positionToLookAt            
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
@@ -155,7 +151,6 @@ public class AnimationAndMovementController : MonoBehaviour
     
     void handleAnimation()
     {
-        // get parameter values from animator
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
 
@@ -163,7 +158,6 @@ public class AnimationAndMovementController : MonoBehaviour
         if (isMovementPressed && !isWalking) {
             animator.SetBool(isWalkingHash, true);
         }
-        // stop walking if isMovementPressed is false and not already walking
         else if (!isMovementPressed && isWalking) {
             animator.SetBool(isWalkingHash, false);
         }
@@ -172,7 +166,6 @@ public class AnimationAndMovementController : MonoBehaviour
         {
             animator.SetBool(isRunningHash, true);
         }
-        // stop running if movement or run pressed are false and currently running
         else if ((!isMovementPressed || !isRunPressed) && isRunning) {
             animator.SetBool(isRunningHash, false);
         }
@@ -209,7 +202,6 @@ public class AnimationAndMovementController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         handleRotation();
