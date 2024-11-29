@@ -22,8 +22,8 @@ public class AnimationAndMovementController : MonoBehaviour
     bool isRunPressed;
 
     // constants
-    float rotationFactorPerFrame = 15.0f;
-    float runMultiplier = 4.0f;
+    float rotationFactorPerFrame = 30.0f;
+    float runMultiplier = 15.0f;
     int zero = 0;
 
     // gravity variables
@@ -33,8 +33,8 @@ public class AnimationAndMovementController : MonoBehaviour
     // jumping variables
     bool isJumpPressed = false;
     float initialJumpVelocity;
-    float maxJumpHeight = 4.0f;
-    float maxJumpTime = 0.75f;
+    float maxJumpHeight = 5.0f;
+    float maxJumpTime = 0.5f;
     bool isJumping = false;
     int isJumpingHash;
     int jumpCountHash;
