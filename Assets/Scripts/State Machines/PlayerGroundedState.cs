@@ -8,7 +8,6 @@ public class PlayerGroundedState : PlayerBaseState, IRootState
   : base (currentContext, playerStateFactory) 
   {
     IsRootState = true;
-    InitializeSubState();
   }
 
   public void HandleGravity()
@@ -19,6 +18,7 @@ public class PlayerGroundedState : PlayerBaseState, IRootState
 
   public override void EnterState()
   {
+      InitializeSubState();
       HandleGravity();
   }
 
