@@ -13,6 +13,7 @@ public class PlayerStateMachine : MonoBehaviour
     // variables to store optimized setter/getter parameter IDs
     int _isWalkingHash;
     int _isRunningHash;
+    int _isFallingHash;
 
     // variables to store player input values
     Vector2 _currentMovementInput;
@@ -58,6 +59,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int JumpCount { get { return _jumpCount; } set { _jumpCount = value; }}
     public int IsWalkingHash { get { return _isWalkingHash; }}
     public int IsRunningHash { get { return _isRunningHash; }}
+    public int IsFallingHash { get { return _isFallingHash; }}
     public int IsJumpingHash { get { return _isJumpingHash; }}
     public int JumpCountHash { get { return _jumpCountHash; }}
     public bool IsMovementPressed { get {return _isMovementPressed; }}
@@ -91,6 +93,7 @@ public class PlayerStateMachine : MonoBehaviour
       // set the parameter hash references
       _isWalkingHash = Animator.StringToHash("isWalking");
       _isRunningHash = Animator.StringToHash("isRunning");
+      _isFallingHash = Animator.StringToHash("isFalling");
       _isJumpingHash = Animator.StringToHash("isJumping");
       _jumpCountHash = Animator.StringToHash("jumpCount");
 
