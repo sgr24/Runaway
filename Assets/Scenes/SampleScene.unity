@@ -1965,13 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 094adcf10c354fe478bf590dc61f052f, type: 2}
     - target: {fileID: 5866666021909216657, guid: 428f76a7ad9a73c45a60e081ff30c7b4, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Breathing Idle'"
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1985,10 +1979,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 428f76a7ad9a73c45a60e081ff30c7b4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 858230769}
+      addedObject: {fileID: 858230770}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 428f76a7ad9a73c45a60e081ff30c7b4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 858230770}
+      addedObject: {fileID: 858230772}
   m_SourcePrefab: {fileID: 100100000, guid: 428f76a7ad9a73c45a60e081ff30c7b4, type: 3}
 --- !u!4 &858230766 stripped
 Transform:
@@ -2000,18 +1994,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7876023681238672744, guid: 428f76a7ad9a73c45a60e081ff30c7b4, type: 3}
   m_PrefabInstance: {fileID: 858230765}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &858230769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716494009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c7195a27b1372940b440ace4ceea224, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &858230770
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2038,6 +2020,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.58, z: 0}
+--- !u!114 &858230772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716494009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85429245531deaa458b93409287753be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &879922791
 GameObject:
   m_ObjectHideFlags: 0
