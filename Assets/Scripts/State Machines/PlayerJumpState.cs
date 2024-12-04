@@ -6,7 +6,7 @@ public class PlayerJumpState : PlayerBaseState, IRootState
 {
   IEnumerator IJumpResetRoutine()
   {
-    yield return new WaitForSeconds(.25f);
+    yield return new WaitForSeconds(.5f);
     Ctx.JumpCount = 0;
   }
 
@@ -21,8 +21,14 @@ public class PlayerJumpState : PlayerBaseState, IRootState
   }
 
   public override void UpdateState(){
-    CheckSwitchStates();
     HandleGravity();
+    CheckSwitchStates();
+  }
+
+    public override void CheckSwitchStates(){
+    if (Ctx.CharacterController.isGrounded) {
+      SwitchState(Factory.Grounded());
+    }
   }
 
   public override void ExitState(){
@@ -45,12 +51,6 @@ public class PlayerJumpState : PlayerBaseState, IRootState
       SetSubState(Factory.Walk());
     } else {
       SetSubState(Factory.Run());
-    }
-  }
-
-  public override void CheckSwitchStates(){
-    if (Ctx.CharacterController.isGrounded) {
-      SwitchState(Factory.Grounded());
     }
   }
 

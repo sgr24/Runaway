@@ -18,8 +18,8 @@ public class PlayerFallState : PlayerBaseState, IRootState
 
     public override void UpdateState()
     {
-        CheckSwitchStates();
         HandleGravity();
+        CheckSwitchStates();
     }
 
     public override void ExitState()
