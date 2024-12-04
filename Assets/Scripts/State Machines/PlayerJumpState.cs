@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerBaseState
+public class PlayerJumpState : PlayerBaseState, IRootState
 {
   IEnumerator IJumpResetRoutine()
   {
@@ -54,7 +54,7 @@ public class PlayerJumpState : PlayerBaseState
     }
   }
 
-  void HandleJump() {
+  public void HandleJump() {
     if (Ctx.JumpCount < 3 && Ctx.CurrentJumpResetRoutine != null)
     {
       Ctx.StopCoroutine(Ctx.CurrentJumpResetRoutine);

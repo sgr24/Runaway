@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFallState : PlayerBaseState
+public class PlayerFallState : PlayerBaseState, IRootState
 {
     public PlayerFallState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     : base (currentContext, playerStateFactory) 
@@ -27,7 +27,7 @@ public class PlayerFallState : PlayerBaseState
         Ctx.Animator.SetBool(Ctx.IsFallingHash, false);
     }
 
-    void HandleGravity()
+    public void HandleGravity()
     {
         float previousYVelocity = Ctx.CurrentMovementY;
         Ctx.CurrentMovementY = Ctx.CurrentMovementY + Ctx.Gravity * Time.deltaTime;

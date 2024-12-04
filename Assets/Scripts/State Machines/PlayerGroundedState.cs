@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerBaseState
+public class PlayerGroundedState : PlayerBaseState, IRootState
 {
   public PlayerGroundedState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
   : base (currentContext, playerStateFactory) 
@@ -11,10 +11,15 @@ public class PlayerGroundedState : PlayerBaseState
     InitializeSubState();
   }
 
-  public override void EnterState()
+  public void HandleGravity()
   {
       Ctx.CurrentMovementY = Ctx.GroundedGravity;
       Ctx.AppliedMovementY = Ctx.GroundedGravity;
+  }
+
+  public override void EnterState()
+  {
+      HandleGravity();
   }
 
   public override void UpdateState()
