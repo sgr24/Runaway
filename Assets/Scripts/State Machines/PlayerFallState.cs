@@ -19,11 +19,19 @@ public class PlayerFallState : PlayerBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
+        HandleGravity();
     }
 
     public override void ExitState()
     {
         
+    }
+
+    void HandleGravity()
+    {
+        float previousYVelocity = Ctx.CurrentMovementY;
+        Ctx.CurrentMovementY = Ctx.CurrentMovementY + Ctx.Gravity * Time.deltaTime;
+        Ctx.AppliedMovementY = Mathf.Max((previousYVelocity + Ctx.CurrentMovementY) * .5f, -20.0f);
     }
 
     public override void CheckSwitchStates()

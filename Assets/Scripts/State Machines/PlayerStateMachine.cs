@@ -66,6 +66,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumping { set { _isJumping = value; }}
     public bool IsJumpPressed { get { return _isJumpPressed; }}
     public float GroundedGravity { get { return _groundedGravity; }}
+    public float Gravity { get { return _gravity; }}
     public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
