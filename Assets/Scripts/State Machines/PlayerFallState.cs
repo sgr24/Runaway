@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerFallState : PlayerBaseState
 {
     public PlayerFallState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-    : base(currentContext, playerStateFactory) 
+    : base (currentContext, playerStateFactory) 
     {
-
+        IsRootState = true;
+        InitializeSubState();
     }
 
     public override void EnterState()
@@ -17,7 +18,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void UpdateState()
     {
-        
+        CheckSwitchStates();
     }
 
     public override void ExitState()
@@ -27,11 +28,21 @@ public class PlayerFallState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-        
+        //if player is grounded, switch to the ground state
+        if (Ctx.CharacterController.isGrounded)
+        {
+            SwitchState(Factory.Grounded());
+        }
     }
 
     public override void InitializeSubState()
     {
-        
+        if (!Ctx.IsMovementPressed && !Ctx.IsRunPressed) {
+        SetSubState(Factory.Idle());
+        } else if (Ctx.IsMovementPressed && !Ctx.IsRunPressed) {
+        SetSubState(Factory.Walk());
+        } else {
+        SetSubState(Factory.Run());
+        }
     }
 }

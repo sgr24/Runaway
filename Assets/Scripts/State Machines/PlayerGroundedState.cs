@@ -44,5 +44,10 @@ public class PlayerGroundedState : PlayerBaseState
     if (Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress) {
       SwitchState(Factory.Jump());
     }
+    // if player is not grounded and jump is not pressed, switch to fall state
+    else if (!Ctx.CharacterController.isGrounded)
+    {
+      SwitchState(Factory.Fall());
+    }
   }
 }
