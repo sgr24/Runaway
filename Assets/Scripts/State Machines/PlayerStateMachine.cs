@@ -29,7 +29,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     // gravity variables
     float _gravity = -9.8f;
-    float _groundedGravity = -.05f;
 
     // jumping variables
     bool _isJumpPressed = false;
@@ -67,7 +66,6 @@ public class PlayerStateMachine : MonoBehaviour
     public bool RequireNewJumpPress { get { return _requireNewJumpPress; } set { _requireNewJumpPress = value; }}
     public bool IsJumping { set { _isJumping = value; }}
     public bool IsJumpPressed { get { return _isJumpPressed; }}
-    public float GroundedGravity { get { return _groundedGravity; }}
     public float Gravity { get { return _gravity; }}
     public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
@@ -113,7 +111,7 @@ public class PlayerStateMachine : MonoBehaviour
     void SetupJumpVariables()
     {
       float timeToApex = _maxJumpTime / 2;
-      _gravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+      float initialgravity = (-2 * _maxJumpHeight) / Mathf.Pow(timeToApex, 2);
       _initialJumpVelocity = (2 * _maxJumpHeight) / timeToApex;
       float secondJumpGravity = (-2 * (_maxJumpHeight + 2)) / Mathf.Pow((timeToApex * 1.25f), 2);
       float secondJumpInitialVelocity = (2 * (_maxJumpHeight + 2)) / (timeToApex * 1.25f);
@@ -124,8 +122,8 @@ public class PlayerStateMachine : MonoBehaviour
       _initialJumpVelocities.Add(2, secondJumpInitialVelocity);
       _initialJumpVelocities.Add(3, thirdJumpInitialVelocity);
 
-      _jumpGravities.Add(0, _gravity);
-      _jumpGravities.Add(1, _gravity);
+      _jumpGravities.Add(0, initialgravity);
+      _jumpGravities.Add(1, initialgravity);
       _jumpGravities.Add(2, secondJumpGravity);
       _jumpGravities.Add(3, thirdJumpGravity);
     }
@@ -133,7 +131,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _characterController.Move(_appliedMovement * Time.deltaTime);
     }
 
     // Update is called once per frame
