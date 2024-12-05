@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    // declare reference variables
+    // Declare reference variables
     CharacterController _characterController;
     Animator _animator;
     PlayerInput _playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector
 
-    // variables to store optimized setter/getter parameter IDs
+    // Variables to store optimized setter/getter parameter IDs
     int _isWalkingHash;
     int _isRunningHash;
     int _isJumpingHash;
@@ -19,7 +19,7 @@ public class PlayerStateMachine : MonoBehaviour
     int _isClimbingHash;
     int _isWallRunningHash;
 
-    // variables to store player input values
+    // Variables to store player input values
     Vector2 _currentMovementInput;
     Vector3 _currentMovement;
     Vector3 _appliedMovement;
@@ -29,16 +29,16 @@ public class PlayerStateMachine : MonoBehaviour
     bool _isClimbPressed;
     bool _isWallRunPressed;
 
-    // constants
+    // Constants
     float _rotationFactorPerFrame = 15.0f;
     float _runMultiplier = 4.0f;
     int _zero = 0;
 
-    // gravity variables
+    // Gravity variables
     float _gravity = -9.8f;
     float _groundedGravity = -.05f;
 
-    // jumping variables
+    // Jumping variables
     bool _isJumpPressed = false;
     float _initialJumpVelocity;
     float _maxJumpHeight = 4.0f;
@@ -50,17 +50,29 @@ public class PlayerStateMachine : MonoBehaviour
     Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
     Coroutine _currentJumpResetRoutine = null;
 
-    //climbing speed
-    public float ClimbSpeed = 2.0f;
+    // Climbing variables
+    public Transform Orientation;
+    public LayerMask WhatIsWall;
+    public bool WallFront { get; private set; }
+    public bool ExitingWall { get; set; }
+    public float ExitWallTime = 0.5f; // Default value
+    public float ExitWallTimer { get; set; }
+    public float ClimbJumpUpForce = 10.0f; // Default value
+    public float ClimbJumpBackForce = 10.0f; // Default value
+    public int ClimbJumps = 2;
+    public int ClimbJumpsLeft { get; set; }
+    public Transform LastWall { get; set; }
+    public RaycastHit FrontWallHit { get; private set; }
+    public float DetectionLength = 1.0f; // Default value
+    public float SphereCastRadius = 0.5f; // Default value
+    public float MaxWallLookAngle = 45.0f; // Default value
+    public float MinWallNormalAngleChange = 10.0f; // Default value
 
-    //wall run speed Multiplier
-    public float WallRunSpeedMultiplier = 3f;
-
-    // state variables
+    // State variables
     PlayerBaseState _currentState;
     PlayerStateFactory _states;
 
-    // getters and setters
+    // Getters and setters
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
     public Animator Animator { get { return _animator; } }
     public CharacterController CharacterController { get { return _characterController; } }
@@ -94,41 +106,59 @@ public class PlayerStateMachine : MonoBehaviour
     // Awake is called earlier than Start in Unity's event life cycle
     void Awake()
     {
-    // initially set reference variables
-    _playerInput = new PlayerInput();
-    _characterController = GetComponent<CharacterController>();
-    _animator = GetComponent<Animator>();
+        // Initially set reference variables
+        _playerInput = new PlayerInput();
+        _characterController = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
 
-    // setup state
-    _states = new PlayerStateFactory(this);
-    _currentState = _states.Grounded();
-    _currentState.EnterState();
+        // Setup state
+        _states = new PlayerStateFactory(this);
+        _currentState = _states.Grounded();
+        _currentState.EnterState();
 
-    // set the parameter hash references
-    _isWalkingHash = Animator.StringToHash("isWalking");
-    _isRunningHash = Animator.StringToHash("isRunning");
-    _isJumpingHash = Animator.StringToHash("isJumping");
-    _jumpCountHash = Animator.StringToHash("jumpCount");
-    _isCrouchingHash = Animator.StringToHash("isCrouching");
-    _isClimbingHash = Animator.StringToHash("isClimbing");
-    _isWallRunningHash = Animator.StringToHash("isWallRunning");
+        // Set the parameter hash references
+        _isWalkingHash = Animator.StringToHash("isWalking");
+        _isRunningHash = Animator.StringToHash("isRunning");
+        _isJumpingHash = Animator.StringToHash("isJumping");
+        _jumpCountHash = Animator.StringToHash("jumpCount");
+        _isCrouchingHash = Animator.StringToHash("isCrouching");
+        _isClimbingHash = Animator.StringToHash("isClimbing");
+        _isWallRunningHash = Animator.StringToHash("isWallRunning");
 
-    // set the player input callbacks
-    _playerInput.CharacterControls.Move.started += OnMovementInput;
-    _playerInput.CharacterControls.Move.canceled += OnMovementInput;
-    _playerInput.CharacterControls.Move.performed += OnMovementInput;
-    _playerInput.CharacterControls.Run.started += OnRun;
-    _playerInput.CharacterControls.Run.canceled += OnRun;
-    _playerInput.CharacterControls.Jump.started += OnJump;
-    _playerInput.CharacterControls.Jump.canceled += OnJump;
-    _playerInput.CharacterControls.Crouch.started += OnCrouch;  
-    _playerInput.CharacterControls.Crouch.canceled += OnCrouch; 
-    _playerInput.CharacterControls.Climb.started += OnClimb;    
-    _playerInput.CharacterControls.Climb.canceled += OnClimb;   
-    _playerInput.CharacterControls.WallRun.started += OnWallRun;  
-    _playerInput.CharacterControls.WallRun.canceled += OnWallRun;
+        // Set the player input callbacks
+        _playerInput.CharacterControls.Move.started;
 
-    SetupJumpVariables();
+        // set the player input callbacks
+        _playerInput.CharacterControls.Move.started += OnMovementInput;
+        _playerInput.CharacterControls.Move.canceled += OnMovementInput;
+        _playerInput.CharacterControls.Move.performed += OnMovementInput;
+        _playerInput.CharacterControls.Run.started += OnRun;
+        _playerInput.CharacterControls.Run.canceled += OnRun;
+        _playerInput.CharacterControls.Jump.started += OnJump;
+        _playerInput.CharacterControls.Jump.canceled += OnJump;
+        _playerInput.CharacterControls.Crouch.started += OnCrouch;  
+        _playerInput.CharacterControls.Crouch.canceled += OnCrouch; 
+        _playerInput.CharacterControls.Climb.started += OnClimb;    
+        _playerInput.CharacterControls.Climb.canceled += OnClimb;   
+        _playerInput.CharacterControls.WallRun.started += OnWallRun;  
+        _playerInput.CharacterControls.WallRun.canceled += OnWallRun;
+
+        SetupJumpVariables();
+    }
+
+    // method to detect climable objects
+    private void WallCheck()
+    {
+        WallFront = Physics.SphereCast(transform.position, SphereCastRadius, Orientation.forward, out FrontWallHit, DetectionLength, WhatIsWall);
+        float wallLookAngle = Vector3.Angle(Orientation.forward, -FrontWallHit.normal);
+
+        bool newWall = FrontWallHit.transform != LastWall || Mathf.Abs(Vector3.Angle(LastWallNormal, FrontWallHit.normal)) > MinWallNormalAngleChange;
+
+        if ((WallFront && newWall) || _characterController.isGrounded)
+        {
+            ClimbTimer = MaxClimbTime;
+            ClimbJumpsLeft = ClimbJumps;
+        }
     }
 
 
@@ -165,6 +195,8 @@ public class PlayerStateMachine : MonoBehaviour
         HandleRotation();
         _currentState.UpdateStates();
         _characterController.Move(_appliedMovement * Time.deltaTime);
+
+        WallCheck();
     }
 
     void HandleRotation()

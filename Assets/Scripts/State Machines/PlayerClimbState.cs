@@ -11,15 +11,12 @@ public class PlayerClimbState : PlayerBaseState
     {
         // Set animator parameters for climbing
         Ctx.Animator.SetBool(Ctx.IsClimbingHash, true);
-        // Set climbing speed
-        Ctx.AppliedMovementY = Ctx.ClimbSpeed * 1f;  // Example: climbing speed
+        Ctx.LastWall = null; // Reset last wall for climbing logic
     }
 
     public override void UpdateState()
     {
-        // Check for state transitions
         CheckSwitchStates();
-        // Handle climbing logic
         HandleClimbing();
     }
 
@@ -33,8 +30,7 @@ public class PlayerClimbState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-        // Transition to grounded state if climb input is released
-        if (!Ctx.IsClimbPressed)
+        if (!Ctx.IsClimbPressed || !Ctx.WallFront || Ctx.ExitingWall)
         {
             SwitchState(Factory.Grounded());
         }
@@ -42,7 +38,27 @@ public class PlayerClimbState : PlayerBaseState
 
     private void HandleClimbing()
     {
-        // Implement climbing logic here
+        if (Ctx.IsClimbPressed && Ctx.WallFront)
+        {
+            Vector3 climbMovement = new Vector3(0, Ctx.ClimbSpeed * Time.deltaTime, 0);
+            Ctx.CharacterController.Move(climbMovement);
+
+            // Handle climb jump
+            if (Ctx.IsJumpPressed && Ctx.ClimbJumpsLeft > 0)
+            {
+                ClimbJump();
+            }
+        }
+    }
+
+    private void ClimbJump()
+    {
+        Ctx.ExitingWall = true;
+        Ctx.ExitWallTimer = Ctx.ExitWallTime;
+
+        Vector3 forceToApply = Vector3.up * Ctx.ClimbJumpUpForce + Ctx.FrontWallHit.normal * Ctx.ClimbJumpBackForce;
+        Ctx.CharacterController.Move(forceToApply * Time.deltaTime);
+
+        Ctx.ClimbJumpsLeft--;
     }
 }
-
