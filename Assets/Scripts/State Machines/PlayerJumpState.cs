@@ -30,6 +30,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void ExitState()
     {
+        // Reset jumping flag and handle new jump press
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
         if (Ctx.IsJumpPressed)
         {
@@ -45,6 +46,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void InitializeSubState()
     {
+        // Set appropriate substate based on movement input
         if (!Ctx.IsMovementPressed && !Ctx.IsRunPressed)
         {
             SetSubState(Factory.Idle());

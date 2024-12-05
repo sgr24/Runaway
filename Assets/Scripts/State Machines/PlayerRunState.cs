@@ -9,18 +9,23 @@ public class PlayerRunState : PlayerBaseState
 
     public override void EnterState()
     {
-        Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
+        // Set animator parameters for running
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);  // Ensure this is required for running
         Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
     }
 
     public override void UpdateState()
     {
         CheckSwitchStates();
+        // Apply movement based on run multiplier
         Ctx.AppliedMovementX = Ctx.CurrentMovementInput.x * Ctx.RunMultiplier;
         Ctx.AppliedMovementZ = Ctx.CurrentMovementInput.y * Ctx.RunMultiplier;
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        // Any cleanup logic if needed
+    }
 
     public override void InitializeSubState() { }
 
@@ -36,3 +41,4 @@ public class PlayerRunState : PlayerBaseState
         }
     }
 }
+

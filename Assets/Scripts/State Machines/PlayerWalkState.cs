@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerWalkState : PlayerBaseState
 {
+    private float walkSpeed = 5f; // Configurable walk speed
+
     public PlayerWalkState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     : base(currentContext, playerStateFactory) { }
 
     public override void EnterState()
     {
+        // Set animator parameters for walking
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
     }
@@ -16,11 +19,15 @@ public class PlayerWalkState : PlayerBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
-        Ctx.AppliedMovementX = Ctx.CurrentMovementInput.x * 10f;
-        Ctx.AppliedMovementZ = Ctx.CurrentMovementInput.y * 10f;
+        // Apply movement based on input
+        Ctx.AppliedMovementX = Ctx.CurrentMovementInput.x * walkSpeed;
+        Ctx.AppliedMovementZ = Ctx.CurrentMovementInput.y * walkSpeed;
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        // Any cleanup logic if needed
+    }
 
     public override void InitializeSubState() { }
 

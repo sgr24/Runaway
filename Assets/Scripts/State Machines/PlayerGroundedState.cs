@@ -13,22 +13,25 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void EnterState()
     {
+        // Apply grounded gravity
         Ctx.CurrentMovementY = Ctx.GroundedGravity;
         Ctx.AppliedMovementY = Ctx.GroundedGravity;
     }
 
     public override void UpdateState()
     {
+        // Check for state transitions
         CheckSwitchStates();
     }
 
     public override void ExitState()
     {
-
+        // Any cleanup logic if needed
     }
 
     public override void InitializeSubState()
     {
+        // Initialize appropriate substate based on input
         if (!Ctx.IsMovementPressed && !Ctx.IsRunPressed)
         {
             SetSubState(Factory.Idle());
@@ -45,7 +48,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-        // if player is grounded and jump is pressed, switch to jump state
+        // If jump is pressed, switch to jump state
         if (Ctx.IsJumpPressed && !Ctx.RequireNewJumpPress)
         {
             SwitchState(Factory.Jump());

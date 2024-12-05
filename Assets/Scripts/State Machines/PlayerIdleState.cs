@@ -9,18 +9,24 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
+        // Set animator parameters for idle state
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        // Reset movement
         Ctx.AppliedMovementX = 0;
         Ctx.AppliedMovementZ = 0;
     }
 
     public override void UpdateState()
     {
+        // Check for state transitions
         CheckSwitchStates();
     }
 
-    public override void ExitState() { }
+    public override void ExitState()
+    {
+        // Any cleanup logic if needed
+    }
 
     public override void InitializeSubState() { }
 

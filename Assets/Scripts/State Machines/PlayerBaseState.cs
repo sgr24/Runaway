@@ -16,12 +16,14 @@ public abstract class PlayerBaseState
         _factory = playerStateFactory;
     }
 
+    // Abstract methods to be implemented by derived classes
     public abstract void EnterState();
     public abstract void UpdateState();
     public abstract void ExitState();
     public abstract void CheckSwitchStates();
     public abstract void InitializeSubState();
 
+    // Update states method to recursively update substates
     public void UpdateStates()
     {
         UpdateState();
@@ -31,31 +33,33 @@ public abstract class PlayerBaseState
         }
     }
 
+    // Method to switch states
     protected void SwitchState(PlayerBaseState newState)
     {
-        // current state exits state
+        // Current state exits state
         ExitState();
-
-        // new state enters state
+        // New state enters state
         newState.EnterState();
 
         if (_isRootState)
         {
-            // switch current state of context
+            // Switch current state of context
             _ctx.CurrentState = newState;
         }
         else if (_currentSuperState != null)
         {
-            // set the current super states sub state to the new state
+            // Set the current super state's substate to the new state
             _currentSuperState.SetSubState(newState);
         }
     }
 
+    // Set the super state
     protected void SetSuperState(PlayerBaseState newSuperState)
     {
         _currentSuperState = newSuperState;
     }
 
+    // Set the substate
     protected void SetSubState(PlayerBaseState newSubState)
     {
         _currentSubState = newSubState;
