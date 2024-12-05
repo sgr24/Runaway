@@ -27,4 +27,16 @@ public class PlayerStateFactory
     {
         return new PlayerGroundedState(_context, this);
     }
+    public PlayerBaseState Crouch()
+    {
+        return new PlayerCrouchState(_context, this);
+    }
+    public PlayerBaseState Climb()
+    {
+        return new PlayerClimbState(_context, this);
+    }
+    public PlayerBaseState WallRun()
+    {
+        return new PlayerWallRunState(_context, this);
+    }
 }
