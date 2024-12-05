@@ -27,7 +27,6 @@ public class PlayerStateMachine : MonoBehaviour
     bool _isRunPressed;
     bool _isCrouchPressed;
     bool _isClimbPressed;
-    bool _isWallRunPressed;
 
     // Constants
     float _rotationFactorPerFrame = 15.0f;
@@ -98,7 +97,6 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool IsCrouchPressed { get { return _isCrouchPressed; } }
     public bool IsClimbPressed { get { return _isClimbPressed; } }
-    public bool IsWallRunPressed { get { return _isWallRunPressed; } }
     public float GroundedGravity { get { return _groundedGravity; } }
     public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
@@ -144,8 +142,6 @@ public class PlayerStateMachine : MonoBehaviour
         _playerInput.CharacterControls.Crouch.canceled += OnCrouch; 
         _playerInput.CharacterControls.Climb.started += OnClimb;    
         _playerInput.CharacterControls.Climb.canceled += OnClimb;   
-        _playerInput.CharacterControls.WallRun.started += OnWallRun;  
-        _playerInput.CharacterControls.WallRun.canceled += OnWallRun;
 
         SetupJumpVariables();
     }
@@ -253,12 +249,6 @@ public class PlayerStateMachine : MonoBehaviour
     void OnClimb(InputAction.CallbackContext context)
     {
         _isClimbPressed = context.ReadValueAsButton();
-    }
-
-    // callback handler function for wall run buttons
-    void OnWallRun(InputAction.CallbackContext context)
-    {
-        _isWallRunPressed = context.ReadValueAsButton();
     }
 
     void OnEnable()
