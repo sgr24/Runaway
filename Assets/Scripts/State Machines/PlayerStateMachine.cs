@@ -13,6 +13,11 @@ public class PlayerStateMachine : MonoBehaviour
     // variables to store optimized setter/getter parameter IDs
     int _isWalkingHash;
     int _isRunningHash;
+    int _isJumpingHash;
+    int _jumpCountHash;
+    int _isCrouchingHash;
+    int _isClimbingHash;
+    int _isWallRunningHash;
 
     // variables to store player input values
     Vector2 _currentMovementInput;
@@ -20,6 +25,9 @@ public class PlayerStateMachine : MonoBehaviour
     Vector3 _appliedMovement;
     bool _isMovementPressed;
     bool _isRunPressed;
+    bool _isCrouchPressed;
+    bool _isClimbPressed;
+    bool _isWallRunPressed;
 
     // constants
     float _rotationFactorPerFrame = 15.0f;
@@ -36,13 +44,17 @@ public class PlayerStateMachine : MonoBehaviour
     float _maxJumpHeight = 4.0f;
     float _maxJumpTime = .75f;
     bool _isJumping = false;
-    int _isJumpingHash;
-    int _jumpCountHash;
     bool _requireNewJumpPress = false;
     int _jumpCount = 0;
     Dictionary<int, float> _initialJumpVelocities = new Dictionary<int, float>();
     Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
     Coroutine _currentJumpResetRoutine = null;
+
+    //climbing speed
+    public float ClimbSpeed = 2.0f;
+
+    //wall run speed Multiplier
+    public float WallRunSpeedMultiplier = 3f;
 
     // state variables
     PlayerBaseState _currentState;
@@ -60,11 +72,17 @@ public class PlayerStateMachine : MonoBehaviour
     public int IsRunningHash { get { return _isRunningHash; } }
     public int IsJumpingHash { get { return _isJumpingHash; } }
     public int JumpCountHash { get { return _jumpCountHash; } }
+    public int IsCrouchingHash { get { return _isCrouchingHash; } }
+    public int IsClimbingHash { get { return _isClimbingHash; } }
+    public int IsWallRunningHash { get { return _isWallRunningHash; } }
     public bool IsMovementPressed { get { return _isMovementPressed; } }
     public bool IsRunPressed { get { return _isRunPressed; } }
     public bool RequireNewJumpPress { get { return _requireNewJumpPress; } set { _requireNewJumpPress = value; } }
     public bool IsJumping { set { _isJumping = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
+    public bool IsCrouchPressed { get { return _isCrouchPressed; } }
+    public bool IsClimbPressed { get { return _isClimbPressed; } }
+    public bool IsWallRunPressed { get { return _isWallRunPressed; } }
     public float GroundedGravity { get { return _groundedGravity; } }
     public float CurrentMovementY { get { return _currentMovement.y; } set { _currentMovement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
@@ -73,37 +91,46 @@ public class PlayerStateMachine : MonoBehaviour
     public float RunMultiplier { get { return _runMultiplier; } }
     public Vector2 CurrentMovementInput { get { return _currentMovementInput; } }
 
-
     // Awake is called earlier than Start in Unity's event life cycle
     void Awake()
     {
-        // initially set reference variables
-        _playerInput = new PlayerInput();
-        _characterController = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+    // initially set reference variables
+    _playerInput = new PlayerInput();
+    _characterController = GetComponent<CharacterController>();
+    _animator = GetComponent<Animator>();
 
-        // setup state
-        _states = new PlayerStateFactory(this);
-        _currentState = _states.Grounded();
-        _currentState.EnterState();
+    // setup state
+    _states = new PlayerStateFactory(this);
+    _currentState = _states.Grounded();
+    _currentState.EnterState();
 
-        // set the parameter hash references
-        _isWalkingHash = Animator.StringToHash("isWalking");
-        _isRunningHash = Animator.StringToHash("isRunning");
-        _isJumpingHash = Animator.StringToHash("isJumping");
-        _jumpCountHash = Animator.StringToHash("jumpCount");
+    // set the parameter hash references
+    _isWalkingHash = Animator.StringToHash("isWalking");
+    _isRunningHash = Animator.StringToHash("isRunning");
+    _isJumpingHash = Animator.StringToHash("isJumping");
+    _jumpCountHash = Animator.StringToHash("jumpCount");
+    _isCrouchingHash = Animator.StringToHash("isCrouching");
+    _isClimbingHash = Animator.StringToHash("isClimbing");
+    _isWallRunningHash = Animator.StringToHash("isWallRunning");
 
-        // set the player input callbacks
-        _playerInput.CharacterControls.Move.started += OnMovementInput;
-        _playerInput.CharacterControls.Move.canceled += OnMovementInput;
-        _playerInput.CharacterControls.Move.performed += OnMovementInput;
-        _playerInput.CharacterControls.Run.started += OnRun;
-        _playerInput.CharacterControls.Run.canceled += OnRun;
-        _playerInput.CharacterControls.Jump.started += OnJump;
-        _playerInput.CharacterControls.Jump.canceled += OnJump;
+    // set the player input callbacks
+    _playerInput.CharacterControls.Move.started += OnMovementInput;
+    _playerInput.CharacterControls.Move.canceled += OnMovementInput;
+    _playerInput.CharacterControls.Move.performed += OnMovementInput;
+    _playerInput.CharacterControls.Run.started += OnRun;
+    _playerInput.CharacterControls.Run.canceled += OnRun;
+    _playerInput.CharacterControls.Jump.started += OnJump;
+    _playerInput.CharacterControls.Jump.canceled += OnJump;
+    _playerInput.CharacterControls.Crouch.started += OnCrouch;  
+    _playerInput.CharacterControls.Crouch.canceled += OnCrouch; 
+    _playerInput.CharacterControls.Climb.started += OnClimb;    
+    _playerInput.CharacterControls.Climb.canceled += OnClimb;   
+    _playerInput.CharacterControls.WallRun.started += OnWallRun;  
+    _playerInput.CharacterControls.WallRun.canceled += OnWallRun;
 
-        SetupJumpVariables();
+    SetupJumpVariables();
     }
+
 
     // set the initial velocity and gravity using jump heights and durations
     void SetupJumpVariables()
@@ -177,6 +204,24 @@ public class PlayerStateMachine : MonoBehaviour
     void OnRun(InputAction.CallbackContext context)
     {
         _isRunPressed = context.ReadValueAsButton();
+    }
+
+    // callback handler function for crouch buttons
+    void OnCrouch(InputAction.CallbackContext context)
+    {
+        _isCrouchPressed = context.ReadValueAsButton();
+    }
+
+    // callback handler function for climb buttons
+    void OnClimb(InputAction.CallbackContext context)
+    {
+        _isClimbPressed = context.ReadValueAsButton();
+    }
+
+    // callback handler function for wall run buttons
+    void OnWallRun(InputAction.CallbackContext context)
+    {
+        _isWallRunPressed = context.ReadValueAsButton();
     }
 
     void OnEnable()
