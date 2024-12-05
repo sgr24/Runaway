@@ -67,6 +67,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float SphereCastRadius = 0.5f; // Default value
     public float MaxWallLookAngle = 45.0f; // Default value
     public float MinWallNormalAngleChange = 10.0f; // Default value
+    public Vector3 LastWallNormal { get; set; }
+    public float ClimbTimer { get; set; }
+    public float MaxClimbTime = 5.0f; // Default value
+
 
     // State variables
     PlayerBaseState _currentState;
@@ -160,6 +164,7 @@ public class PlayerStateMachine : MonoBehaviour
             ClimbJumpsLeft = ClimbJumps;
         }
     }
+
 
 
     // set the initial velocity and gravity using jump heights and durations
