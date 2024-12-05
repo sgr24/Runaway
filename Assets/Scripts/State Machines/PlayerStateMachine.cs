@@ -8,7 +8,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Declare reference variables
     CharacterController _characterController;
     Animator _animator;
-    PlayerInput _playerInput; // NOTE: PlayerInput class must be generated from New Input System in Inspector
+    PlayerInput _playerInput;
 
     // Variables to store optimized setter/getter parameter IDs
     int _isWalkingHash;
@@ -49,26 +49,46 @@ public class PlayerStateMachine : MonoBehaviour
     Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
     Coroutine _currentJumpResetRoutine = null;
 
+    // Wall Running Variables
+    public float WallRunForce;
+    public float WallJumpUpForce;
+    public float WallJumpSideForce;
+    public float WallClimbSpeed;
+    public float MaxWallRunTime;
+    public float WallCheckDistance;
+    public bool UseGravity;
+    public float GravityCounterForce;
+    public float WallRunSpeedMultiplier = 3f;
+    public Rigidbody Rb;
+
+    // Additional necessary variables...
+    public RaycastHit LeftWallHit { get; private set; }
+    public RaycastHit RightWallHit { get; private set; }
+    public bool UpwardsRunning;
+    public bool DownwardsRunning;
+    public float HorizontalInput;
+    public float VerticalInput;
+
     // Climbing variables
     public Transform Orientation;
     public LayerMask WhatIsWall;
     public bool WallFront { get; private set; }
     public bool ExitingWall { get; set; }
-    public float ExitWallTime = 0.5f; // Default value
+    public float ExitWallTime = 0.5f; 
     public float ExitWallTimer { get; set; }
-    public float ClimbJumpUpForce = 10.0f; // Default value
-    public float ClimbJumpBackForce = 10.0f; // Default value
+    public float ClimbJumpUpForce = 10.0f; 
+    public float ClimbJumpBackForce = 10.0f; 
     public int ClimbJumps = 2;
     public int ClimbJumpsLeft { get; set; }
     public Transform LastWall { get; set; }
     public RaycastHit FrontWallHit { get; private set; }
-    public float DetectionLength = 1.0f; // Default value
-    public float SphereCastRadius = 0.5f; // Default value
-    public float MaxWallLookAngle = 45.0f; // Default value
-    public float MinWallNormalAngleChange = 10.0f; // Default value
+    public float DetectionLength = 1.0f; 
+    public float SphereCastRadius = 0.5f; 
+    public float MaxWallLookAngle = 45.0f; 
+    public float MinWallNormalAngleChange = 10.0f; 
     public Vector3 LastWallNormal { get; set; }
     public float ClimbTimer { get; set; }
-    public float MaxClimbTime = 5.0f; // Default value
+    public float MaxClimbTime = 5.0f; 
 
 
     // State variables
@@ -161,6 +181,21 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
+        {
+            SwitchState(_states.WallRun());
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
+        {
+            SwitchState(_states.Grounded());
+        }
+    }
 
 
     // set the initial velocity and gravity using jump heights and durations
