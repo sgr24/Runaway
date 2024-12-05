@@ -12,7 +12,7 @@ public class PlayerClimbState : PlayerBaseState
         // Set animator parameters for climbing
         Ctx.Animator.SetBool(Ctx.IsClimbingHash, true);
         // Set climbing speed
-        Ctx.AppliedMovementY = Ctx.ClimbSpeed;  // Example: climbing speed
+        Ctx.AppliedMovementY = Ctx.ClimbSpeed * 1f;  // Example: climbing speed
     }
 
     public override void UpdateState()
