@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWalkState : PlayerBaseState
 {
-    private float walkSpeed = 5f; // Configurable walk speed
+    private float walkSpeed = 10f; // Configurable walk speed
 
     public PlayerWalkState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
     : base(currentContext, playerStateFactory) { }

@@ -18,8 +18,8 @@ public class PlayerRunState : PlayerBaseState
     {
         CheckSwitchStates();
         // Apply movement based on run multiplier
-        Ctx.AppliedMovementX = Ctx.CurrentMovementInput.x * Ctx.RunMultiplier;
-        Ctx.AppliedMovementZ = Ctx.CurrentMovementInput.y * Ctx.RunMultiplier;
+        Ctx.AppliedMovementX = Ctx.CurrentMovementInput.x * Ctx.RunMultiplier * 2f;
+        Ctx.AppliedMovementZ = Ctx.CurrentMovementInput.y * Ctx.RunMultiplier * 2f;
     }
 
     public override void ExitState()

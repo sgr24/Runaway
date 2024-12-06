@@ -61,7 +61,6 @@ public class PlayerStateMachine : MonoBehaviour
     public bool UseGravity;
     public float GravityCounterForce;
     public float WallRunSpeedMultiplier = 3f;
-    public Rigidbody Rb;
 
     // Additional necessary variables...
     public bool UpwardsRunning;
@@ -70,7 +69,6 @@ public class PlayerStateMachine : MonoBehaviour
     public float VerticalInput;
 
     // Climbing variables
-    public Transform Orientation;
     public LayerMask WhatIsWall;
     public bool WallFront { get; private set; }
     public bool ExitingWall { get; set; }
@@ -177,8 +175,8 @@ public class PlayerStateMachine : MonoBehaviour
     private void WallCheck()
     {
         RaycastHit frontWallHit;
-        bool wallFront = Physics.SphereCast(transform.position, SphereCastRadius, Orientation.forward, out frontWallHit, DetectionLength, WhatIsWall);
-        float wallLookAngle = Vector3.Angle(Orientation.forward, -frontWallHit.normal);
+        bool wallFront = Physics.SphereCast(transform.position, SphereCastRadius, transform.forward, out frontWallHit, DetectionLength, WhatIsWall);
+        float wallLookAngle = Vector3.Angle(transform.forward, -frontWallHit.normal);
 
         bool newWall = frontWallHit.transform != LastWall || Mathf.Abs(Vector3.Angle(LastWallNormal, frontWallHit.normal)) > MinWallNormalAngleChange;
 
@@ -192,6 +190,7 @@ public class PlayerStateMachine : MonoBehaviour
         FrontWallHit = frontWallHit;
         WallFront = wallFront;
     }
+
 
     public void SetWallHits(RaycastHit leftHit, RaycastHit rightHit)
     {

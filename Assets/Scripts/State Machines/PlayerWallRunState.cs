@@ -18,7 +18,7 @@ public class PlayerWallRunState : PlayerBaseState
         Ctx.Animator.SetBool(Ctx.IsWallRunningHash, true);
         Ctx.AppliedMovementX *= Ctx.WallRunSpeedMultiplier;
         Ctx.AppliedMovementY = 0;
-        Ctx.Rb.useGravity = false;  // Use Rigidbody's useGravity
+        Ctx.UseGravity = false;  // Disable gravity
         wallRunTimer = Ctx.MaxWallRunTime;
     }
 
@@ -32,7 +32,7 @@ public class PlayerWallRunState : PlayerBaseState
     public override void ExitState()
     {
         Ctx.Animator.SetBool(Ctx.IsWallRunningHash, false);
-        Ctx.Rb.useGravity = true;  // Use Rigidbody's useGravity
+        Ctx.UseGravity = true;  // Enable gravity
     }
 
     public override void InitializeSubState() { }
@@ -74,35 +74,37 @@ public class PlayerWallRunState : PlayerBaseState
 
     private void WallRunningMovement()
     {
-        Ctx.Rb.useGravity = Ctx.UseGravity;
-
         Vector3 wallNormal = wallRight ? Ctx.RightWallHit.normal : Ctx.LeftWallHit.normal;
         Vector3 wallForward = Vector3.Cross(wallNormal, Vector3.up);
 
-        if ((Ctx.Orientation.forward - wallForward).magnitude > (Ctx.Orientation.forward - -wallForward).magnitude)
+        if ((Ctx.transform.forward - wallForward).magnitude > (Ctx.transform.forward - -wallForward).magnitude)
         {
             wallForward = -wallForward;
         }
 
-        Ctx.Rb.AddForce(wallForward * Ctx.WallRunForce, ForceMode.Force);
+        Ctx.AppliedMovement = wallForward * Ctx.WallRunForce * Time.deltaTime;
 
         if (Ctx.UpwardsRunning)
         {
-            Ctx.Rb.velocity = new Vector3(Ctx.Rb.velocity.x, Ctx.WallClimbSpeed, Ctx.Rb.velocity.z);
+            var movement = Ctx.AppliedMovement;
+            movement.y = Ctx.WallClimbSpeed;
+            Ctx.AppliedMovement = movement;
         }
         else if (Ctx.DownwardsRunning)
         {
-            Ctx.Rb.velocity = new Vector3(Ctx.Rb.velocity.x, -Ctx.WallClimbSpeed, Ctx.Rb.velocity.z);
+            var movement = Ctx.AppliedMovement;
+            movement.y = -Ctx.WallClimbSpeed;
+            Ctx.AppliedMovement = movement;
         }
 
         if (!(wallLeft && Ctx.HorizontalInput > 0) && !(wallRight && Ctx.HorizontalInput < 0))
         {
-            Ctx.Rb.AddForce(-wallNormal * 100, ForceMode.Force);
+            Ctx.AppliedMovement += -wallNormal * 100 * Time.deltaTime;
         }
 
         if (Ctx.UseGravity)
         {
-            Ctx.Rb.AddForce(Vector3.up * Ctx.GravityCounterForce, ForceMode.Force);
+            Ctx.AppliedMovement += Vector3.up * Ctx.GravityCounterForce * Time.deltaTime;
         }
     }
 
@@ -111,10 +113,9 @@ public class PlayerWallRunState : PlayerBaseState
         RaycastHit leftWallHit;
         RaycastHit rightWallHit;
 
-        wallRight = Physics.Raycast(Ctx.transform.position, Ctx.Orientation.right, out rightWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
-        wallLeft = Physics.Raycast(Ctx.transform.position, -Ctx.Orientation.right, out leftWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
+        wallRight = Physics.Raycast(Ctx.transform.position, Ctx.transform.right, out rightWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
+        wallLeft = Physics.Raycast(Ctx.transform.position, -Ctx.transform.right, out leftWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
 
         Ctx.SetWallHits(leftWallHit, rightWallHit);
     }
-
 }
