@@ -50,6 +50,8 @@ public class PlayerStateMachine : MonoBehaviour
     Coroutine _currentJumpResetRoutine = null;
 
     // Wall Running Variables
+    public RaycastHit LeftWallHit { get; set; }
+    public RaycastHit RightWallHit { get; set; }
     public float WallRunForce;
     public float WallJumpUpForce;
     public float WallJumpSideForce;
@@ -62,8 +64,6 @@ public class PlayerStateMachine : MonoBehaviour
     public Rigidbody Rb;
 
     // Additional necessary variables...
-    public RaycastHit LeftWallHit { get; private set; }
-    public RaycastHit RightWallHit { get; private set; }
     public bool UpwardsRunning;
     public bool DownwardsRunning;
     public float HorizontalInput;
@@ -82,6 +82,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int ClimbJumpsLeft { get; set; }
     public Transform LastWall { get; set; }
     public RaycastHit FrontWallHit { get; private set; }
+    public float ClimbSpeed = 1.5f;
     public float DetectionLength = 1.0f; 
     public float SphereCastRadius = 0.5f; 
     public float MaxWallLookAngle = 45.0f; 
@@ -124,6 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float AppliedMovementZ { get { return _appliedMovement.z; } set { _appliedMovement.z = value; } }
     public float RunMultiplier { get { return _runMultiplier; } }
     public Vector2 CurrentMovementInput { get { return _currentMovementInput; } }
+    public Vector3 AppliedMovement { get { return _appliedMovement; } set { _appliedMovement = value; } }
 
     // Awake is called earlier than Start in Unity's event life cycle
     void Awake()
@@ -148,9 +150,6 @@ public class PlayerStateMachine : MonoBehaviour
         _isWallRunningHash = Animator.StringToHash("isWallRunning");
 
         // Set the player input callbacks
-        _playerInput.CharacterControls.Move.started;
-
-        // set the player input callbacks
         _playerInput.CharacterControls.Move.started += OnMovementInput;
         _playerInput.CharacterControls.Move.canceled += OnMovementInput;
         _playerInput.CharacterControls.Move.performed += OnMovementInput;
@@ -166,19 +165,38 @@ public class PlayerStateMachine : MonoBehaviour
         SetupJumpVariables();
     }
 
+    // SwitchState method to handle state transitions
+    public void SwitchState(PlayerBaseState newState)
+    {
+        _currentState.ExitState();
+        _currentState = newState;
+        _currentState.EnterState();
+    }
+
     // method to detect climable objects
     private void WallCheck()
     {
-        WallFront = Physics.SphereCast(transform.position, SphereCastRadius, Orientation.forward, out FrontWallHit, DetectionLength, WhatIsWall);
-        float wallLookAngle = Vector3.Angle(Orientation.forward, -FrontWallHit.normal);
+        RaycastHit frontWallHit;
+        bool wallFront = Physics.SphereCast(transform.position, SphereCastRadius, Orientation.forward, out frontWallHit, DetectionLength, WhatIsWall);
+        float wallLookAngle = Vector3.Angle(Orientation.forward, -frontWallHit.normal);
 
-        bool newWall = FrontWallHit.transform != LastWall || Mathf.Abs(Vector3.Angle(LastWallNormal, FrontWallHit.normal)) > MinWallNormalAngleChange;
+        bool newWall = frontWallHit.transform != LastWall || Mathf.Abs(Vector3.Angle(LastWallNormal, frontWallHit.normal)) > MinWallNormalAngleChange;
 
-        if ((WallFront && newWall) || _characterController.isGrounded)
+        if ((wallFront && newWall) || _characterController.isGrounded)
         {
             ClimbTimer = MaxClimbTime;
             ClimbJumpsLeft = ClimbJumps;
         }
+
+        // Assign the local hit to the property
+        FrontWallHit = frontWallHit;
+        WallFront = wallFront;
+    }
+
+    public void SetWallHits(RaycastHit leftHit, RaycastHit rightHit)
+    {
+        LeftWallHit = leftHit;
+        RightWallHit = rightHit;
     }
 
     void OnCollisionEnter(Collision collision)

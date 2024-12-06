@@ -114,7 +114,7 @@ public class PlayerWallRunState : PlayerBaseState
         wallRight = Physics.Raycast(Ctx.transform.position, Ctx.Orientation.right, out rightWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
         wallLeft = Physics.Raycast(Ctx.transform.position, -Ctx.Orientation.right, out leftWallHit, Ctx.WallCheckDistance, Ctx.WhatIsWall);
 
-        Ctx.LeftWallHit = leftWallHit;
-        Ctx.RightWallHit = rightWallHit;
+        Ctx.SetWallHits(leftWallHit, rightWallHit);
     }
+
 }
