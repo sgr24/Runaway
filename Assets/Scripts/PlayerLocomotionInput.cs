@@ -1,18 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerLocomotionInput : MonoBehaviour
+namespace Runaway.FinalCharacterController
 {
-    // Start is called before the first frame update
-    void Start()
+    [DefaultExecutionOrder(-2)]
+    public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions
     {
-        
-    }
+        public PlayerControls PlayerControls { get; private set; }
+        public Vector2 MovementInput { get; private set; }
+        public Vector2 LookInput { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnEnable()
+        {
+            PlayerControls = new PlayerControls();
+            PlayerControls.Enable();
+
+            PlayerControls.PlayerLocomotionMap.Enable();
+            PlayerControls.PlayerLocomotionMap.SetCallbacks(this);
+        }
+
+        private void OnDisable()
+        {
+            PlayerControls.PlayerLocomotionMap.Disable();
+            PlayerControls.PlayerLocomotionMap.RemoveCallbacks(this);
+        }
+
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            MovementInput = context.ReadValue<Vector2>();
+            print(MovementInput);
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            LookInput = context.ReadValue<Vector2>();
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            // Implement movement logic here
+        }
+
+        public void OnRun(InputAction.CallbackContext context)
+        {
+            // Implement run logic here
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            // Implement jump logic here
+        }
+
+        public void OnCrouch(InputAction.CallbackContext context)
+        {
+            // Implement crouch logic here
+        }
+
+        public void OnClimb(InputAction.CallbackContext context)
+        {
+            // Implement climb logic here
+        }
     }
 }
