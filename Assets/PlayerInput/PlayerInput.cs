@@ -15,16 +15,18 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @PlayerInput: IInputActionCollection2, IDisposable
+namespace Runaway.FinalCharacterController
 {
-    public InputActionAsset asset { get; }
-    public @PlayerInput()
+    public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @PlayerControls()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
-            ""name"": ""CharacterControls"",
+            ""name"": ""PlayerLocomotionMap"",
             ""id"": ""914f5648-a305-4ff7-9c91-4c5563efbcfa"",
             ""actions"": [
                 {
@@ -308,164 +310,165 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // CharacterControls
-        m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Move = m_CharacterControls.FindAction("Move", throwIfNotFound: true);
-        m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
-        m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
-        m_CharacterControls_Look = m_CharacterControls.FindAction("Look", throwIfNotFound: true);
-        m_CharacterControls_Crouch = m_CharacterControls.FindAction("Crouch", throwIfNotFound: true);
-        m_CharacterControls_Climb = m_CharacterControls.FindAction("Climb", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    public IEnumerable<InputBinding> bindings => asset.bindings;
-
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
-
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
-
-    // CharacterControls
-    private readonly InputActionMap m_CharacterControls;
-    private List<ICharacterControlsActions> m_CharacterControlsActionsCallbackInterfaces = new List<ICharacterControlsActions>();
-    private readonly InputAction m_CharacterControls_Move;
-    private readonly InputAction m_CharacterControls_Run;
-    private readonly InputAction m_CharacterControls_Jump;
-    private readonly InputAction m_CharacterControls_Look;
-    private readonly InputAction m_CharacterControls_Crouch;
-    private readonly InputAction m_CharacterControls_Climb;
-    public struct CharacterControlsActions
-    {
-        private @PlayerInput m_Wrapper;
-        public CharacterControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_CharacterControls_Move;
-        public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
-        public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
-        public InputAction @Look => m_Wrapper.m_CharacterControls_Look;
-        public InputAction @Crouch => m_Wrapper.m_CharacterControls_Crouch;
-        public InputAction @Climb => m_Wrapper.m_CharacterControls_Climb;
-        public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterControlsActions set) { return set.Get(); }
-        public void AddCallbacks(ICharacterControlsActions instance)
-        {
-            if (instance == null || m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Add(instance);
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
-            @Climb.started += instance.OnClimb;
-            @Climb.performed += instance.OnClimb;
-            @Climb.canceled += instance.OnClimb;
+            // PlayerLocomotionMap
+            m_PlayerLocomotionMap = asset.FindActionMap("PlayerLocomotionMap", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Move = m_PlayerLocomotionMap.FindAction("Move", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Run = m_PlayerLocomotionMap.FindAction("Run", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Jump = m_PlayerLocomotionMap.FindAction("Jump", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Look = m_PlayerLocomotionMap.FindAction("Look", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Crouch = m_PlayerLocomotionMap.FindAction("Crouch", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Climb = m_PlayerLocomotionMap.FindAction("Climb", throwIfNotFound: true);
         }
 
-        private void UnregisterCallbacks(ICharacterControlsActions instance)
+        public void Dispose()
         {
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
-            @Climb.started -= instance.OnClimb;
-            @Climb.performed -= instance.OnClimb;
-            @Climb.canceled -= instance.OnClimb;
+            UnityEngine.Object.Destroy(asset);
         }
 
-        public void RemoveCallbacks(ICharacterControlsActions instance)
+        public InputBinding? bindingMask
         {
-            if (m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
         }
 
-        public void SetCallbacks(ICharacterControlsActions instance)
+        public ReadOnlyArray<InputDevice>? devices
         {
-            foreach (var item in m_Wrapper.m_CharacterControlsActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
+            get => asset.devices;
+            set => asset.devices = value;
         }
-    }
-    public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
-    public interface ICharacterControlsActions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
-        void OnClimb(InputAction.CallbackContext context);
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
+        public IEnumerable<InputBinding> bindings => asset.bindings;
+
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+        {
+            return asset.FindAction(actionNameOrId, throwIfNotFound);
+        }
+
+        public int FindBinding(InputBinding bindingMask, out InputAction action)
+        {
+            return asset.FindBinding(bindingMask, out action);
+        }
+
+        // PlayerLocomotionMap
+        private readonly InputActionMap m_PlayerLocomotionMap;
+        private List<IPlayerLocomotionMapActions> m_PlayerLocomotionMapActionsCallbackInterfaces = new List<IPlayerLocomotionMapActions>();
+        private readonly InputAction m_PlayerLocomotionMap_Move;
+        private readonly InputAction m_PlayerLocomotionMap_Run;
+        private readonly InputAction m_PlayerLocomotionMap_Jump;
+        private readonly InputAction m_PlayerLocomotionMap_Look;
+        private readonly InputAction m_PlayerLocomotionMap_Crouch;
+        private readonly InputAction m_PlayerLocomotionMap_Climb;
+        public struct PlayerLocomotionMapActions
+        {
+            private @PlayerControls m_Wrapper;
+            public PlayerLocomotionMapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_PlayerLocomotionMap_Move;
+            public InputAction @Run => m_Wrapper.m_PlayerLocomotionMap_Run;
+            public InputAction @Jump => m_Wrapper.m_PlayerLocomotionMap_Jump;
+            public InputAction @Look => m_Wrapper.m_PlayerLocomotionMap_Look;
+            public InputAction @Crouch => m_Wrapper.m_PlayerLocomotionMap_Crouch;
+            public InputAction @Climb => m_Wrapper.m_PlayerLocomotionMap_Climb;
+            public InputActionMap Get() { return m_Wrapper.m_PlayerLocomotionMap; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PlayerLocomotionMapActions set) { return set.Get(); }
+            public void AddCallbacks(IPlayerLocomotionMapActions instance)
+            {
+                if (instance == null || m_Wrapper.m_PlayerLocomotionMapActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PlayerLocomotionMapActionsCallbackInterfaces.Add(instance);
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
+                @Climb.started += instance.OnClimb;
+                @Climb.performed += instance.OnClimb;
+                @Climb.canceled += instance.OnClimb;
+            }
+
+            private void UnregisterCallbacks(IPlayerLocomotionMapActions instance)
+            {
+                @Move.started -= instance.OnMove;
+                @Move.performed -= instance.OnMove;
+                @Move.canceled -= instance.OnMove;
+                @Run.started -= instance.OnRun;
+                @Run.performed -= instance.OnRun;
+                @Run.canceled -= instance.OnRun;
+                @Jump.started -= instance.OnJump;
+                @Jump.performed -= instance.OnJump;
+                @Jump.canceled -= instance.OnJump;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
+                @Crouch.started -= instance.OnCrouch;
+                @Crouch.performed -= instance.OnCrouch;
+                @Crouch.canceled -= instance.OnCrouch;
+                @Climb.started -= instance.OnClimb;
+                @Climb.performed -= instance.OnClimb;
+                @Climb.canceled -= instance.OnClimb;
+            }
+
+            public void RemoveCallbacks(IPlayerLocomotionMapActions instance)
+            {
+                if (m_Wrapper.m_PlayerLocomotionMapActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPlayerLocomotionMapActions instance)
+            {
+                foreach (var item in m_Wrapper.m_PlayerLocomotionMapActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_PlayerLocomotionMapActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public PlayerLocomotionMapActions @PlayerLocomotionMap => new PlayerLocomotionMapActions(this);
+        public interface IPlayerLocomotionMapActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnRun(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
+            void OnCrouch(InputAction.CallbackContext context);
+            void OnClimb(InputAction.CallbackContext context);
+        }
     }
 }

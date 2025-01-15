@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "CharacterControls",
+            "name": "PlayerLocomotionMap",
             "id": "914f5648-a305-4ff7-9c91-4c5563efbcfa",
             "actions": [
                 {
