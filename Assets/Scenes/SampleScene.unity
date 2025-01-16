@@ -1889,17 +1889,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee348fd9f31f44aa1603d5f542b629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 0}
-  _playerCamera: {fileID: 0}
+  _characterController: {fileID: 858230769}
+  _playerCamera: {fileID: 1739887537}
   runAcceleration: 50
   runSpeed: 4
   drag: 20
   lookSenseH: 0.1
   lookSenseV: 0.1
   lookLimitV: 89
-  _playerLocomotionInput: {fileID: 0}
-  _cameraRotation: {x: 0, y: 0}
-  _playerTargetRotation: {x: 0, y: 0}
 --- !u!1 &879922791
 GameObject:
   m_ObjectHideFlags: 0
