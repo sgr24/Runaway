@@ -8,6 +8,16 @@ namespace Runaway.FinalCharacterController
     [DefaultExecutionOrder(-2)]
     public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerLocomotionMapActions
     {
+        [SerializeField] private bool holdToRun = true;
+        [SerializeField] private CharacterController characterController;
+        [SerializeField] Animator playerAnimator;
+        [SerializeField] private float runSpeedMultiplier = 2f;
+        [SerializeField] private bool holdToCrouch = true;
+        [SerializeField] private float runAcceleration = 20f;
+        [SerializeField] private float runSpeed = 10f;
+        [SerializeField] private float walkSpeed = 5f;
+
+        public bool RunToggledOn { get; private set; }
         public PlayerControls PlayerControls { get; private set; }
         public Vector2 MovementInput { get; private set; }
         public Vector2 LookInput { get; private set; }
@@ -45,7 +55,14 @@ namespace Runaway.FinalCharacterController
 
         public void OnRun(InputAction.CallbackContext context)
         {
-            // Implement run logic here
+            if (context.performed)
+            {
+                RunToggledOn = holdToRun || !RunToggledOn;
+            }
+            else if (context.canceled)
+            {
+                RunToggledOn = !holdToRun && RunToggledOn;
+            }
         }
 
         public void OnJump(InputAction.CallbackContext context)

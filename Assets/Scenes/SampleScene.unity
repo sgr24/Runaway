@@ -227,6 +227,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14616309}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &45564627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3869498496576543249, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+  m_PrefabInstance: {fileID: 5755092434063088170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &45564631 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5097759609313407311, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+  m_PrefabInstance: {fileID: 5755092434063088170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &45564633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45564627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1af490e391a6c40b984fcb6505bba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 45564631}
+  locomotionBlendSpeed: 4
+--- !u!114 &45564634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45564627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6c5a3465a0f3f40b1721eeccddbb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrentPlayerMovementState>k__BackingField: 0
 --- !u!1 &223451700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3769,6 +3806,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3547665531239593888, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: lookSenseH
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3547665531239593888, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: lookSenseV
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3869498496576543249, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
       propertyPath: m_Name
       value: ThirdPerson_Main_Character113
@@ -3776,7 +3821,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3869498496576543249, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45564634}
+    - targetCorrespondingSourceObject: {fileID: 3869498496576543249, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45564633}
   m_SourcePrefab: {fileID: 100100000, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
