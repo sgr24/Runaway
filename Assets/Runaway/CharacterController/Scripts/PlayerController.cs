@@ -8,6 +8,8 @@ namespace Runaway.FinalCharacterController
     [DefaultExecutionOrder(-1)]
     public class PlayerController : MonoBehaviour
     {
+        #region Class Variables
+        [Header("Components")]
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private Camera _playerCamera;
 
@@ -29,13 +31,17 @@ namespace Runaway.FinalCharacterController
 
         private Vector2 _cameraRotation = Vector2.zero;
         private Vector2 _playerTargetRotation = Vector2.zero;
+        #endregion
 
+        #region Startup
         private void Awake()
         {
             _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
             _playerState = GetComponent<PlayerState>();
         }
+        #endregion
 
+        #region Update Logic
         private void Update()
         {
             UpdateMovementState();
@@ -73,8 +79,10 @@ namespace Runaway.FinalCharacterController
 
             _characterController.Move(newVelocity * Time.deltaTime);
         }
+        #endregion
 
-            private void LateUpdate()
+        #region Late Update Logic
+        private void LateUpdate()
         {
             _cameraRotation.x += lookSenseH * _playerLocomotionInput.LookInput.x;
             _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV * _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
@@ -84,12 +92,15 @@ namespace Runaway.FinalCharacterController
 
             _playerCamera.transform.rotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0f);
         }
+        #endregion
 
+        #region State Checks
         private bool IsMovingLaterally()
         {
             Vector3 lateralVelocity = new Vector3(_characterController.velocity.x, 0f, _characterController.velocity.y);
 
             return lateralVelocity.magnitude > movingThreshold;
         }
+        #endregion
     }
 }
