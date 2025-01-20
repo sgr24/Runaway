@@ -54,7 +54,8 @@ namespace Runaway.FinalCharacterController
         {
             Vector3 move = new Vector3(MovementInput.x, 0, MovementInput.y);
             move = transform.TransformDirection(move);
-            float speed = RunToggledOn ? runSpeed : walkSpeed;
+            float acceleration = RunToggledOn ? runAcceleration : walkSpeed;
+            float speed = RunToggledOn ? runSpeedMultiplier : walkSpeed;
             characterController.Move(move * speed * Time.deltaTime);
         }
 
