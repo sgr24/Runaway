@@ -40,6 +40,8 @@ namespace Runaway.FinalCharacterController
         public void OnMovement(InputAction.CallbackContext context)
         {
             MovementInput = context.ReadValue<Vector2>();
+            playerAnimator.SetFloat("inputX", MovementInput.x);
+            playerAnimator.SetFloat("inputY", MovementInput.y);
             print(MovementInput);
         }
 
@@ -50,7 +52,10 @@ namespace Runaway.FinalCharacterController
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            // Implement movement logic here
+            Vector3 move = new Vector3(MovementInput.x, 0, MovementInput.y);
+            move = transform.TransformDirection(move);
+            float speed = RunToggledOn ? runSpeed : walkSpeed;
+            characterController.Move(move * speed * Time.deltaTime);
         }
 
         public void OnRun(InputAction.CallbackContext context)
@@ -58,26 +63,28 @@ namespace Runaway.FinalCharacterController
             if (context.performed)
             {
                 RunToggledOn = holdToRun || !RunToggledOn;
+                playerAnimator.SetBool("isRunning", RunToggledOn);
             }
             else if (context.canceled)
             {
                 RunToggledOn = !holdToRun && RunToggledOn;
+                playerAnimator.SetBool("isRunning", RunToggledOn);
             }
         }
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            // Implement jump logic here
+            playerAnimator.SetTrigger("jump");
         }
 
         public void OnCrouch(InputAction.CallbackContext context)
         {
-            // Implement crouch logic here
+            playerAnimator.SetBool("isCrouching", holdToCrouch && context.performed);
         }
 
         public void OnClimb(InputAction.CallbackContext context)
         {
-            // Implement climb logic here
+            playerAnimator.SetBool("isClimbing", context.performed);
         }
     }
 }
