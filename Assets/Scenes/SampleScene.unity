@@ -264,6 +264,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentPlayerMovementState>k__BackingField: 0
+--- !u!143 &45564637 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 9205861034286275172, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+  m_PrefabInstance: {fileID: 5755092434063088170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &223451700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3818,6 +3823,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirdPerson_Main_Character113
       objectReference: {fileID: 0}
+    - target: {fileID: 7678639987156293678, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 45564631}
+    - target: {fileID: 7678639987156293678, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 45564637}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
