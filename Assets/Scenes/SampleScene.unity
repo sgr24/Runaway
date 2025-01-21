@@ -3819,9 +3819,17 @@ PrefabInstance:
       propertyPath: lookSenseV
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3747136394528383731, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3869498496576543249, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
       propertyPath: m_Name
       value: ThirdPerson_Main_Character113
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213487222515522600, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7678639987156293678, guid: 3cf4fb26a81f2c34483134d4abe16e19, type: 3}
       propertyPath: playerAnimator
