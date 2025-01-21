@@ -20,7 +20,7 @@ namespace Runaway.FinalCharacterController
 
         private void Awake()
         {
-            _playerLocomotionInput = GetComponent<PlayerLocomotionInput>();
+            _playerLocomotionInput = GetComponent<PlayerLocomotionInput>(); 
             _playerState = GetComponent<PlayerState>();
         }
 
