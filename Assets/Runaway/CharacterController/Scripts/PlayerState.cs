@@ -12,6 +12,14 @@ namespace Runaway.FinalCharacterController
         {
             CurrentPlayerMovementState = playerMovementState;
         }
+
+        // Moved the method inside the PlayerState class to access CurrentPlayerMovementState
+        public bool InGroundedState()
+        {
+            return CurrentPlayerMovementState == PlayerMovementState.Idle || 
+                   CurrentPlayerMovementState == PlayerMovementState.Walking || 
+                   CurrentPlayerMovementState == PlayerMovementState.Running;
+        }
     }
 
     public enum PlayerMovementState
