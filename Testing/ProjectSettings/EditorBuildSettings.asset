@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Runaway Settings/Other Materials/Scenes/Featured Gameplay Scene.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 24512896e28cfaf43bae03b9b3cb3782
+  - enabled: 1
+    path: Assets/Scenes/Runaway TimeTrial.unity
     guid: 2558f861aef28d64ebe62b69c46f3b82
   m_configObjects: {}

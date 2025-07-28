@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Runaway Settings/Other Materials/Scenes/Featured Gameplay Scene.unity
+- path: Assets/Scenes/Menu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
