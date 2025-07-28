@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: Press <b>' </b>(apostrophe) to close
+  m_Text: 
 --- !u!1 &108054633746022870
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.25
-  m_Text: Press <b>' </b>(apostrophe) to open Debug Console
+  m_Text: 
 --- !u!225 &8297447536737093534
 CanvasGroup:
   m_ObjectHideFlags: 0
