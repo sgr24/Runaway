@@ -1456,7 +1456,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (11)
@@ -2670,7 +2670,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (8)
@@ -5522,6 +5522,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1887505804}
     m_Modifications:
+    - target: {fileID: 2851215648956785520, guid: 60f53c242a4391149b3e8b36af7610ff, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99fe1959403e58d47a49b625e95d554a, type: 2}
     - target: {fileID: 2851215648956785525, guid: 60f53c242a4391149b3e8b36af7610ff, type: 3}
       propertyPath: m_Name
       value: Vault - 0.5m
@@ -7530,7 +7534,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (12)
@@ -11825,6 +11829,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5466267152930441372, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 7807811369668589583, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
       propertyPath: m_Convex
       value: 0
@@ -13144,7 +13152,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (10)
@@ -14735,6 +14743,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 594579674}
     m_Modifications:
+    - target: {fileID: 3852392901432822304, guid: cdf9f6902cbbbed4c8dc03dda37a551a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 7339802442541973351, guid: cdf9f6902cbbbed4c8dc03dda37a551a, type: 3}
       propertyPath: m_Name
       value: Climbable Cylinder
@@ -19515,6 +19527,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5466267152930441372, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 877624595664375824, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
@@ -23714,7 +23730,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (17)
@@ -30601,7 +30617,7 @@ PrefabInstance:
     - target: {fileID: 6461396785772538277, guid: f5647a99680c4f149830b3999ac10eaa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     - target: {fileID: 8233937969608250334, guid: f5647a99680c4f149830b3999ac10eaa, type: 3}
       propertyPath: m_Name
       value: Ramp
@@ -34747,7 +34763,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (7)
@@ -35957,7 +35973,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (5)
@@ -38026,7 +38042,10 @@ PrefabInstance:
         <color=#FFE600>SPACE</color> - Jump from one ledge
         to another
 
-        <color=#FFE600>X</color> - Drop from ledge'
+        <color=#FFE600>X</color> - Drop from ledge
+
+        <color=#FFE600>SHIFT
+        + SPACE</color> - Get on the platform from the edge'
       objectReference: {fileID: 0}
     - target: {fileID: 5192127825935787952, guid: 82415143722644b49b0efc552f1c19ee, type: 3}
       propertyPath: m_sharedMaterial
@@ -38953,7 +38972,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (6)
@@ -46715,7 +46734,7 @@ PrefabInstance:
     - target: {fileID: 2244993401480622397, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 53f12285877a20e49ba0dcd0332d2c12, type: 2}
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 4570084511436971023, guid: 3ad682183bc3ff04490e3d166efb2fe9, type: 3}
       propertyPath: m_Name
       value: Block (9)
