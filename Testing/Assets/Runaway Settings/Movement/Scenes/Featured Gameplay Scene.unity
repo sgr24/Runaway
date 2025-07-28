@@ -240,10 +240,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 594579674}
     m_Modifications:
+    - target: {fileID: 787007812806681448, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
+    - target: {fileID: 816786888168418481, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 2917355873165135089, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
       propertyPath: m_Name
       value: 8 Sided - Climbable  (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3371540821517546330, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5038949291354313776, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.3122001
@@ -288,6 +300,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6421293373888582459, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 877624595664375824, guid: cce7b30e9f1ffa3478714bac499bfc7b, type: 3}
@@ -1435,6 +1451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 4443282180079350093, guid: 81d475b4d257bff4ea209622ddcb449f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99fe1959403e58d47a49b625e95d554a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4457,6 +4477,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (15)
@@ -6303,6 +6327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (19)
@@ -6792,6 +6820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (18)
@@ -6862,6 +6894,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (17)
@@ -16295,6 +16331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ladder - 4m (no climb up) (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8125727782450281948, guid: 51b5fae4919b8584d87570c79d8b4d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18734,6 +18774,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (15)
@@ -20861,6 +20905,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 487387674}
     m_Modifications:
+    - target: {fileID: 4660162461033683026, guid: de0610300f4f07e45929d1a86ba5418c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     - target: {fileID: 4660162461464310479, guid: de0610300f4f07e45929d1a86ba5418c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -22629,6 +22677,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 876274830088258379, guid: 9985dcd7fa7943143a81e24a2c8c63cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a4741b91a1a807a489cdb39fc0eaa041, type: 2}
+    - target: {fileID: 4688189657256237875, guid: 9985dcd7fa7943143a81e24a2c8c63cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
+    - target: {fileID: 5018134013035285996, guid: 9985dcd7fa7943143a81e24a2c8c63cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
+    - target: {fileID: 7503071655952671866, guid: 9985dcd7fa7943143a81e24a2c8c63cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
+    - target: {fileID: 8074997961783312264, guid: 9985dcd7fa7943143a81e24a2c8c63cb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24091,6 +24159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ladder - 4m (no climb up)
       objectReference: {fileID: 0}
+    - target: {fileID: 8125727782450281948, guid: 51b5fae4919b8584d87570c79d8b4d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25498,6 +25570,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (19)
@@ -31237,6 +31313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 4443282180079350093, guid: 81d475b4d257bff4ea209622ddcb449f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99fe1959403e58d47a49b625e95d554a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32040,6 +32120,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (14)
@@ -35686,6 +35770,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (17)
@@ -38598,6 +38686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 487387674}
     m_Modifications:
+    - target: {fileID: 4660162461033683026, guid: de0610300f4f07e45929d1a86ba5418c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1dc8766e3f48bba4584c9007c5a1b124, type: 2}
     - target: {fileID: 4660162461464310479, guid: de0610300f4f07e45929d1a86ba5418c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.5
@@ -44486,6 +44578,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points
@@ -45221,6 +45317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3608465126728873876, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f71e6ef84d734ae439c9dfd3b77c32b0, type: 2}
     - target: {fileID: 5983863270486712315, guid: 9b346a538e9830246a44926fe10795f3, type: 3}
       propertyPath: m_Name
       value: Ledge 4m - 20 points (18)
