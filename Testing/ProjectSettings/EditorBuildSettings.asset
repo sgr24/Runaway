@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Runaway Settings/Movement/Scenes/Featured Gameplay Scene.unity
+    path: Assets/Runaway Settings/Other Materials/Scenes/Featured Gameplay Scene.unity
     guid: 2558f861aef28d64ebe62b69c46f3b82
   m_configObjects: {}

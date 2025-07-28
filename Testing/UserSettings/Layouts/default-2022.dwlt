@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 344
     height: 590
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -274,8 +274,8 @@ MonoBehaviour:
     y: 0
     width: 443
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -611,9 +611,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 38.486332, y: 3.418148, z: -29.266434}
+    m_Target: {x: 51.733955, y: -2.3636186, z: -20.309393}
     speed: 2
-    m_Value: {x: 38.486332, y: 3.418148, z: -29.266434}
+    m_Value: {x: 51.733955, y: -2.3636186, z: -20.309393}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -659,9 +659,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.506
   m_Rotation:
-    m_Target: {x: 0.014728392, y: -0.97245604, z: 0.06461341, w: 0.22410393}
+    m_Target: {x: -0.026194386, y: -0.9328708, z: 0.35304794, w: -0.06862905}
     speed: 2
-    m_Value: {x: 0.014726293, y: -0.9723175, z: 0.06460421, w: 0.22407201}
+    m_Value: {x: -0.025661105, y: -0.932839, z: 0.3530362, w: -0.067220025}
   m_Size:
     m_Target: 12.124355
     speed: 2
@@ -727,9 +727,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 18820000
       m_LastClickedID: 0
-      m_ExpandedIDs: e2d4ffff06ecffff78ecffff12fbffffe66400000a6b0000
+      m_ExpandedIDs: 0091ffff1493ffff2ec6ffff1cc7ffff12fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -966,7 +966,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Runaway Settings/Other Materials/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -974,16 +974,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 88
   m_LastFolders:
-  - Assets
+  - Assets/Runaway Settings/Other Materials/Scenes
   m_LastFoldersGridSize: 88
   m_LastProjectPath: F:\Shaharin\University\Year 3\Runaway\Testing
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: 7a830000
-    m_LastClickedID: 33658
-    m_ExpandedIDs: 000000007a8300007c8300007e83000080830000828300008483000086830000888300008a830000a283000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 348}
+    m_SelectedIDs: 86830000
+    m_LastClickedID: 33670
+    m_ExpandedIDs: 000000007c8300007e83000080830000828300008483000086830000888300008a8300008c830000a483000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1011,7 +1011,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007a8300007c8300007e83000080830000828300008483000086830000888300008a830000
+    m_ExpandedIDs: 000000007c8300007e83000080830000828300008483000086830000888300008a8300008c830000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
