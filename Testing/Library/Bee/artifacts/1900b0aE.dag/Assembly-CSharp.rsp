@@ -381,6 +381,9 @@
 "Assets/MainMenu.cs"
 "Assets/PauseMenu.cs"
 "Assets/SettingsMenu.cs"
+"Assets/StopBlockTrigger.cs"
+"Assets/Timer.cs"
+"Assets/TitleMusicPlayer.cs"
 -langversion:9.0
 /deterministic
 /optimize+

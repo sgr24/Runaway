@@ -344,14 +344,14 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.49f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/Ability.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/AbilitySystemController.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/AbilityTag.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/AbilityTagContainer.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/AbilityTagSettings.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/AssemblyInfo.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/GameplayEffect.cs"
-"Assets/Runaway Settings/Scripts/DiasGames.AbilitySystem/Core/IAbilitySystem.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/Ability.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/AbilitySystemController.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/AbilityTag.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/AbilityTagContainer.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/AbilityTagSettings.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/AssemblyInfo.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/GameplayEffect.cs"
+"Assets/Runaway Settings/Scripts/Movement ability systems/Core/IAbilitySystem.cs"
 -langversion:9.0
 /deterministic
 /optimize+
